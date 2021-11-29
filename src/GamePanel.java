@@ -14,6 +14,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     final int GAME = 1;
     final int END = 2;
     int currentState = MENU;
+    Rocketship rs = new Rocketship(250, 700, 50, 50);
     Font titleFont;
     Font subtitleFont;
     Timer FrameDraw;
@@ -56,6 +57,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 void drawGameState(Graphics g) {  
 	 g.setColor(Color.BLACK);
 	 g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+	 rs.draw(g);
 }
 void drawEndState(Graphics g)  {  
 	 g.setColor(Color.RED);
@@ -92,23 +94,33 @@ public void keyPressed(KeyEvent e) {
 	if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 	    if (currentState == END) {
 	        currentState = MENU;
-	    } else {
+	    } 
+	    else {
 	        currentState++;
 	    }
+	}
 	    if (e.getKeyCode()==KeyEvent.VK_W) {
-    System.out.println("UP");
+	    	if (rs.y > 5) {
+    rs.up();
+	    	}
 }
 	    if (e.getKeyCode()==KeyEvent.VK_S) {
-    System.out.println("DOWN");
+	    	if (rs.y < 715) {
+   rs.down();
+	    	}
 }
 	    if (e.getKeyCode()==KeyEvent.VK_A) {
-    System.out.println("LEFT");
+	    	if (rs.x > 5) {
+   rs.left();
+	    	}
 }
 	    if (e.getKeyCode()==KeyEvent.VK_D) {
-    System.out.println("RIGHT");
+	    	if (rs.x < 440) {
+    rs.right();
+	    	}
 }
-	    //fix
-	}   
+	   //change movement to have drag
+	
 }
 @Override
 public void keyReleased(KeyEvent e) {
