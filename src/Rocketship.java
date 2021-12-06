@@ -1,11 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
-
+import javax.swing.Timer;
 public class Rocketship extends GameObject {
 
 	public Rocketship(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 10;
+		speed = 1;
 		drag = 10;
 	} 
 	void draw(Graphics g) {
@@ -14,6 +14,7 @@ public class Rocketship extends GameObject {
 	}
 	   public void left() {
 	        x-=speed;
+	   
 	    }  
 	   public void right() {
 	        x+=speed;

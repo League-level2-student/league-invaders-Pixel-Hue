@@ -18,10 +18,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     Font titleFont;
     Font subtitleFont;
     Timer FrameDraw;
+    Timer movement;
     public GamePanel() {
     	   titleFont = new Font("Arial", Font.PLAIN, 48);	
     	   subtitleFont = new Font("Arial", Font.PLAIN, 32);
    	    FrameDraw = new Timer(1000/60,this);
+   	    movement = new Timer(100, this);
+   	    movement.setInitialDelay(1900);
    FrameDraw.start();
     }
 	@Override
@@ -99,29 +102,28 @@ public void keyPressed(KeyEvent e) {
 	        currentState++;
 	    }
 	}
-	    if (e.getKeyCode()==KeyEvent.VK_W) {
-	    	if (rs.y > 5) {
-    rs.up();
-	    	}
+    if (e.getKeyCode()==KeyEvent.VK_W) {
+   
 }
-	    if (e.getKeyCode()==KeyEvent.VK_S) {
-	    	if (rs.y < 715) {
-   rs.down();
-	    	}
+    if (e.getKeyCode()==KeyEvent.VK_S) {
+    	
 }
-	    if (e.getKeyCode()==KeyEvent.VK_A) {
-	    	if (rs.x > 5) {
-   rs.left();
-	    	}
+    if (e.getKeyCode()==KeyEvent.VK_A) {
+    	
+    
+    		
+    		 rs.x-=rs.speed;
+    		
 }
-	    if (e.getKeyCode()==KeyEvent.VK_D) {
-	    	if (rs.x < 440) {
-    rs.right();
-	    	}
+   	
+
+    if (e.getKeyCode()==KeyEvent.VK_D) {
+    	
 }
-	   //change movement to have drag
+}
+	   //change movement to be smoother
 	
-}
+
 @Override
 public void keyReleased(KeyEvent e) {
 	// TODO Auto-generated method stub
