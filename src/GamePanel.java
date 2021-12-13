@@ -103,25 +103,21 @@ public void keyPressed(KeyEvent e) {
 	    }
 	}
     if (e.getKeyCode()==KeyEvent.VK_W) {
-   
+   rs.up();
 }
     if (e.getKeyCode()==KeyEvent.VK_S) {
+    	rs.down();
     	
 }
     if (e.getKeyCode()==KeyEvent.VK_A) {
-    	
-    
-    		
-    		 rs.x-=rs.speed;
+    rs.left();
     		
 }
-   	
-
     if (e.getKeyCode()==KeyEvent.VK_D) {
-    	
+    	rs.right();
 }
 }
-	   //change movement to be smoother
+
 	
 
 @Override
