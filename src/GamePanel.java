@@ -19,7 +19,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
     Font subtitleFont;
     Timer FrameDraw;
     Timer movement;
+    ObjectManager om;
     public GamePanel() {
+    	om = new ObjectManager(rs);
     	   titleFont = new Font("Arial", Font.PLAIN, 48);	
     	   subtitleFont = new Font("Arial", Font.PLAIN, 32);
    	    FrameDraw = new Timer(1000/60,this);
@@ -41,7 +43,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		 
 	 }
 	 void updateGameState() {  
-		 
+		 om.update();
 	 }
 	 void updateEndState()  {  
 		 
@@ -61,6 +63,7 @@ void drawGameState(Graphics g) {
 	 g.setColor(Color.BLACK);
 	 g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 	 rs.draw(g);
+	 om.draw(g);
 }
 void drawEndState(Graphics g)  {  
 	 g.setColor(Color.RED);
