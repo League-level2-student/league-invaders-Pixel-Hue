@@ -5,11 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;
 	final int MENU = 0;
     final int GAME = 1;
     final int END = 2;
@@ -28,6 +32,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
    	    movement = new Timer(100, this);
    	    movement.setInitialDelay(1900);
    FrameDraw.start();
+   if (needImage) {
+		//loadImage("space.png");
+	}
     }
 	@Override
 	public void paintComponent(Graphics g){
@@ -60,10 +67,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		 g.drawString("Press SPACE for instructions", 25,600);
 	 }
 void drawGameState(Graphics g) {  
+	if (gotImage) {
+		g.drawImage(image, 0, 0, WIDTH, HEIGHT, null);
+		} else {
 	 g.setColor(Color.BLACK);
 	 g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		}
 	 rs.draw(g);
 	 om.draw(g);
+		
 }
 void drawEndState(Graphics g)  {  
 	 g.setColor(Color.RED);
@@ -76,6 +88,16 @@ void drawEndState(Graphics g)  {
 	 g.drawString("Press ENTER to restart", 65,600);
 	 
 	
+}
+void loadImage(String imageFile) {
+	   if (needImage) {
+		try {
+			
+		} catch (Exception e) {
+			
+		}
+		needImage = false;
+	}
 }
 @Override
 public void actionPerformed(ActionEvent e) {

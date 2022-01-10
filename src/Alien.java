@@ -1,16 +1,37 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class Alien extends GameObject {
+	public static BufferedImage image;
+	public static boolean needImage = true;
+	public static boolean gotImage = false;
  Alien(int x, int y, int width, int height) {
 	 super(x, y, width, height);
 	 speed = 1;
+	 if (needImage) {
+			//loadImage("alien.png");
+		}
  }
  void update() {
 	 y+=speed;
  }
  void draw(Graphics g) {
+	 if (gotImage) {
+			g.drawImage(image, x, y, width, height, null);
+			} else {
 	 g.setColor(Color.YELLOW);
      g.fillRect(x, y, width, height);
+			}
+ }
+ void loadImage(String imageFile) {
+	   if (needImage) {
+		try {
+			
+		} catch (Exception e) {
+			
+		}
+		needImage = false;
+	}
  }
 }
