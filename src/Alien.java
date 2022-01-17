@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+
 public class Alien extends GameObject {
 	public static BufferedImage image;
 	public static boolean needImage = true;
@@ -10,7 +12,7 @@ public class Alien extends GameObject {
 	 super(x, y, width, height);
 	 speed = 1;
 	 if (needImage) {
-			//loadImage("alien.png");
+			loadImage("alien.png");
 		}
  }
  void update() {
@@ -27,7 +29,8 @@ public class Alien extends GameObject {
  void loadImage(String imageFile) {
 	   if (needImage) {
 		try {
-			
+			image = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+			gotImage = true;
 		} catch (Exception e) {
 			
 		}
