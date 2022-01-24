@@ -24,6 +24,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Font subtitleFont;
 	Timer FrameDraw;
 	Timer movement;
+	Timer alienSpawn;
 	ObjectManager om;
 
 	public GamePanel() {
@@ -110,6 +111,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 
+	void startGame() {
+		alienSpawn = new Timer(1000, om);
+		alienSpawn.start();
+
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (currentState == MENU) {
@@ -131,10 +138,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
+
 				currentState = MENU;
+			
 			} else {
+				if (currentState==MENU) {
+				startGame();
+				System.out.println("hi");
+				}
 				currentState++;
 			}
 		}
@@ -151,6 +165,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_D) {
 			rs.right();
+		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			om.addProjectile(rs.getProjectile());
+			System.out.println("jopn");
+		}
+		if (currentState == END) {
+			alienSpawn.stop();
+
 		}
 	}
 
