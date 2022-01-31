@@ -14,7 +14,7 @@ ArrayList<Alien> aliens = new ArrayList();
 	this.rs=rocket;
 }
 	public void addProjectile(Projectile pj) {
-		projectiles.add(new Projectile(new Random().nextInt(LeagueInvaders.WIDTH),0,50,50));
+		projectiles.add(new Projectile( rs.x +21, rs.y-10,50,50));
 	}
 	void addAlien() {
 		aliens.add(new Alien(new Random().nextInt(LeagueInvaders.WIDTH),0,50,50));
@@ -33,6 +33,8 @@ ArrayList<Alien> aliens = new ArrayList();
 			}
 			
 		}
+		//checkCollision();// remove // when method is fixed
+		purgeObjects();
 		}
 	void draw(Graphics g) {
 		rs.draw(g);
@@ -55,6 +57,16 @@ ArrayList<Alien> aliens = new ArrayList();
 				projectiles.remove(i);
 			}}
 
+	}
+	void checkCollision() {
+		for (int i = 0; i < aliens.size() - 1; i++) {
+			if (rs.collisionBox.intersects(alien.collisionBox)) {
+				aliens.get(i).isActive = false;
+				rs.isActive = false;
+				System.out.println("coll");
+				//fix
+			}
+		}
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

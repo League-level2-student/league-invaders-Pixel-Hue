@@ -11,7 +11,7 @@ public class Projectile extends GameObject {
 
 	public Projectile(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 10;
+		speed = 1;
 		if (needImage) {
 			loadImage("bullet.png");
 		}
@@ -19,11 +19,12 @@ public class Projectile extends GameObject {
 
 	void update() {
 		y -= speed;
+		super.update();
 	}
 
 	void draw(Graphics g) {
 		if (gotImage) {
-			g.drawImage(image, x, y, 36, 56, null);
+			g.drawImage(image, x, y, 18, 28, null);
 		} else {
 			g.setColor(Color.RED);
 			g.fillRect(x, y, width, height);

@@ -16,12 +16,13 @@ public class Alien extends GameObject {
 		}
  }
  void update() {
-	 if (y>860) {
-		
+	 if (y>830) {
+		isActive=false;
 	}
 	 else {
 	 y+=speed;
 	 }
+	 super.update();
  }
  void draw(Graphics g) {
 	 if (gotImage) {
