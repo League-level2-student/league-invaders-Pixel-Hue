@@ -33,8 +33,11 @@ ArrayList<Alien> aliens = new ArrayList();
 			}
 			
 		}
-		//checkCollision();// remove // when method is fixed
-		purgeObjects();
+		if (rs.isActive==true) {
+			checkCollision();
+			purgeObjects();
+		}
+		
 		}
 	void draw(Graphics g) {
 		rs.draw(g);
@@ -59,12 +62,11 @@ ArrayList<Alien> aliens = new ArrayList();
 
 	}
 	void checkCollision() {
+		System.out.println("red");
 		for (int i = 0; i < aliens.size() - 1; i++) {
+			System.out.println("hey");
 			if (rs.collisionBox.intersects(alien.collisionBox)) {
-				aliens.get(i).isActive = false;
-				rs.isActive = false;
-				System.out.println("coll");
-				//fix
+				System.out.println("hello");
 			}
 		}
 	}
