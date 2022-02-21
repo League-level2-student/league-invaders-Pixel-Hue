@@ -5,18 +5,19 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ObjectManager implements ActionListener {
-	Rocketship rs;
+	Rocketship rocket;
+	int score = 0;
 	
 
 	ArrayList<Projectile> projectiles = new ArrayList();
 	ArrayList<Alien> aliens = new ArrayList();
 
 	public ObjectManager(Rocketship rocket) {
-		this.rs = rocket;
+		this.rocket = rocket;
 	}
 
 	public void addProjectile(Projectile pj) {
-		projectiles.add(new Projectile(rs.x + 21, rs.y - 10, 50, 50));
+		projectiles.add(new Projectile(rocket.x + 21, rocket.y - 10, 50, 50));
 	}
 
 	void addAlien() {
@@ -24,6 +25,7 @@ public class ObjectManager implements ActionListener {
 	}
 
 	void update() {
+		rocket.update();
 		for (int i = 0; i < aliens.size() - 1; i++) {
 			aliens.get(i).update();
 			if (aliens.get(i).y > LeagueInvaders.HEIGHT) {
@@ -37,7 +39,8 @@ public class ObjectManager implements ActionListener {
 			}
 
 		}
-		if (rs.isActive == true) {
+		
+		if (rocket.isActive == true) {
 			checkCollision();
 			purgeObjects();
 		}
@@ -45,7 +48,7 @@ public class ObjectManager implements ActionListener {
 	}
 
 	void draw(Graphics g) {
-		rs.draw(g);
+		rocket.draw(g);
 		for (int i = 0; i < aliens.size() - 1; i++) {
 			aliens.get(i).draw(g);
 
@@ -73,15 +76,30 @@ public class ObjectManager implements ActionListener {
 	void checkCollision() {
 		for (int i = 0; i < aliens.size() - 1; i++) {
 			Alien alien = aliens.get(i);
-			if (rs.collisionBox.intersects(alien.collisionBox)) {
-				System.out.println("hello");
+		
+			if (rocket.collisionBox.intersects(alien.collisionBox)) {
+				rocket.isActive = false;
 			}
 		}
+		for (int i = 0; i < aliens.size() - 1; i++) {
+		Alien alien = aliens.get(i);
+		for (int j = 0; j < projectiles.size() - 1; j++) {
+			Projectile pj = projectiles.get(j);
+			if (pj.collisionBox.intersects(alien.collisionBox)) {
+				aliens.remove(i);
+				projectiles.remove(j);
+				score++;
+			}
+		}
+	}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		addAlien();
 
+	}
+	void getScore() {
+		
 	}
 }

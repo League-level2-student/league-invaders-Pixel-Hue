@@ -8,39 +8,42 @@ public class Alien extends GameObject {
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;
- Alien(int x, int y, int width, int height) {
-	 super(x, y, width, height);
-	 speed = 1;
-	 if (needImage) {
+
+	Alien(int x, int y, int width, int height) {
+		super(x, y, width, height);
+		speed = 1;
+		if (needImage) {
 			loadImage("alien.png");
 		}
- }
- void update() {
-	 if (y>830) {
-		isActive=false;
 	}
-	 else {
-	 y+=speed;
-	 }
-	 super.update();
- }
- void draw(Graphics g) {
-	 if (gotImage) {
-			g.drawImage(image, x, y, 60, 60, null);
-			} else {
-	 g.setColor(Color.YELLOW);
-     g.fillRect(x, y, width, height);
-			}
- }
- void loadImage(String imageFile) {
-	   if (needImage) {
-		try {
-			image = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
-			gotImage = true;
-		} catch (Exception e) {
-			
+
+	void update() {
+		if (y > 830) {
+			isActive = false;
+		} else {
+			y += speed;
 		}
-		needImage = false;
+		super.update();
 	}
- }
+
+	void draw(Graphics g) {
+		if (gotImage) {
+			g.drawImage(image, x, y, 60, 60, null);
+		} else {
+			g.setColor(Color.YELLOW);
+			g.fillRect(x, y, width, height);
+		}
+	}
+
+	void loadImage(String imageFile) {
+		if (needImage) {
+			try {
+				image = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+				gotImage = true;
+			} catch (Exception e) {
+
+			}
+			needImage = false;
+		}
+	}
 }

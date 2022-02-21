@@ -87,7 +87,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		rs.draw(g);
 		om.draw(g);
-
+		g.setColor(Color.WHITE);
+		g.setFont(subtitleFont);
+g.drawString("Score: " + om.score, 5, 30);
 	}
 
 	void drawEndState(Graphics g) {
@@ -175,7 +177,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (currentState == END) {
 			alienSpawn.stop();
-
+//replace inactive rocket with new rocket
 		}
 	}
 
