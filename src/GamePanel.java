@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME = 1;
 	final int END = 2;
 	int currentState = MENU;
-	Rocketship rs = new Rocketship(250, 700, 50, 50);
+	Rocketship rs = new Rocketship(225, 700, 50, 50);
 	Font titleFont;
 	Font subtitleFont;
 	Timer FrameDraw;
@@ -63,7 +63,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateEndState() {
-
+		om.removeAliens();
+		om.removeProjectiles();
 	}
 
 	void drawMenuState(Graphics g) {
@@ -89,7 +90,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		om.draw(g);
 		g.setColor(Color.WHITE);
 		g.setFont(subtitleFont);
-g.drawString("Score: " + om.score, 5, 30);
+		g.drawString("Score: " + om.score, 5, 30);
 	}
 
 	void drawEndState(Graphics g) {
@@ -99,7 +100,7 @@ g.drawString("Score: " + om.score, 5, 30);
 		g.setColor(Color.YELLOW);
 		g.drawString("Game Over", 100, 100);
 		g.setFont(subtitleFont);
-		g.drawString("You killed " + " enemies", 90, 400);
+		g.drawString("You killed " + om.score + " enemies", 90, 400);
 		g.drawString("Press ENTER to restart", 65, 600);
 
 	}
@@ -143,18 +144,23 @@ g.drawString("Score: " + om.score, 5, 30);
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (currentState == END) {
 
-				currentState = MENU;
+				currentState = GAME;
+				rs.isActive = true;
+				rs.x=225;
+				rs.y=700;
 			
+				alienSpawn.start();
+				om.score = 0;
 			} else {
-				if (currentState==MENU) {
-				startGame();
-				System.out.println("hi");
+				if (currentState == MENU) {
+					startGame();
+					currentState++;
 				}
-				currentState++;
+			
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_W) {
@@ -173,11 +179,10 @@ g.drawString("Score: " + om.score, 5, 30);
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			om.addProjectile(rs.getProjectile());
-			System.out.println("jopn");
 		}
 		if (currentState == END) {
 			alienSpawn.stop();
-//replace inactive rocket with new rocket
+			
 		}
 	}
 

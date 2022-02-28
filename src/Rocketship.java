@@ -43,16 +43,17 @@ public class Rocketship extends GameObject {
 	public void down() {
 		y += speed;
 	}
+
 	public Projectile getProjectile() {
-		return new Projectile(x+width/2, y, 10, 10);
-		
+		return new Projectile(x + width / 2, y, 10, 10);
+
 	}
 
 	void loadImage(String imageFile) {
 		if (needImage) {
 			try {
-image = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
-gotImage=true;
+				image = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+				gotImage = true;
 			} catch (Exception e) {
 
 			}
